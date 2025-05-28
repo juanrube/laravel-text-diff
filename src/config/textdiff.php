@@ -1,23 +1,15 @@
 <?php
 
-use Jfcherng\Diff\Contract\Renderer\RendererConstant;
+use Jfcherng\Diff\Contract\Renderer\CliColorEnum;
 
 return [
     // renderer class name:
     //     Text renderers: Context, JsonText, Unified
     //     HTML renderers: Combined, Inline, JsonHtml, SideBySide
-    $rendererName => [
-        'Combined',
-        'Context',
-        'Inline',
-        'JsonHtml',
-        'JsonText',
-        'SideBySide',
-        'Unified',
-    ],
+    'renderer_name' => 'SideBySide',
 
     // the Diff class options
-    $differOptions => [
+    'differ_options' => [
         // show how many neighbor lines
         // Differ::CONTEXT_ALL can be used to show the whole file
         'context' => 3,
@@ -34,7 +26,7 @@ return [
     ],
 
     // the renderer class options
-    $rendererOptions => [
+    'renderer_options' => [
         // how detailed the rendered HTML in-line diff is? (none, line, word, char)
         'detailLevel' => 'line',
         // renderer language: eng, cht, chs, jpn, ...
@@ -57,10 +49,10 @@ return [
         // depending on the content changed ratio, which values between 0 and 1.
         'mergeThreshold' => 0.8,
         // this option is currently only for the Unified and the Context renderers.
-        // RendererConstant::CLI_COLOR_AUTO = colorize the output if possible (default)
-        // RendererConstant::CLI_COLOR_ENABLE = force to colorize the output
-        // RendererConstant::CLI_COLOR_DISABLE = force not to colorize the output
-        'cliColorization' => RendererConstant::CLI_COLOR_AUTO,
+        // CliColorEnum::CLI_COLOR_AUTO = colorize the output if possible (default)
+        // CliColorEnum::CLI_COLOR_ENABLE = force to colorize the output
+        // CliColorEnum::CLI_COLOR_DISABLE = force not to colorize the output
+        'cliColorization' => CliColorEnum::Auto,
         // this option is currently only for the Json renderer.
         // internally, ops (tags) are all int type but this is not good for human reading.
         // set this to "true" to convert them into string form before outputting.
