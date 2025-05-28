@@ -70,14 +70,26 @@ Solo usa {!! $textdiff !!} en cualquier plantilla Blade:
     {!! $textdiff !!}
 </head>
 <body>
-    <x-text-diff :old-text="$oldText" :new-text="$newText" />
+    <x-text-diff :old-text="$oldText" :new-text="$newText" :title="$titulo">
+        
+        <!-- O incluso puedes usar el slot en lugar de $titulo -->
+    
+    <x-text-diff :old-text="$oldText" :new-text="$newText"
+        <x-slot name="title">Mi título personalizado</x-slot>
+    </x-text-diff>
 </body>
 </html>
 ```
 
 Uso del Componente Blade
 ```html
-<x-text-diff :old-text="$oldText" :new-text="$newText" />
+    <x-text-diff :old-text="$oldText" :new-text="$newText" :title="$titulo">
+        
+        <!-- O -->
+    
+    <x-text-diff :old-text="$oldText" :new-text="$newText"
+        <x-slot name="title">Mi título personalizado</x-slot>
+    </x-text-diff>
 ```
 
 * old-text: Texto original.
