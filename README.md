@@ -30,7 +30,7 @@ Configuración (opcional)
 ```php
 return [
     // renderer class name:
-    $rendererName => [
+    'rendererName' => [
         'Combined',
         'Context',
         'Inline',
@@ -41,7 +41,7 @@ return [
     ],
 
     // the Diff class options
-    $differOptions => [
+    'differOptions' => [
         // show how many neighbor lines
         // Differ::CONTEXT_ALL can be used to show the whole file
         'context' => 3,
