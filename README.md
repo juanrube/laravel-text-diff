@@ -78,3 +78,8 @@ Esto publica:
 * config/textdiff.php (archivo de configuración)
 * public/vendor/textdiff/textdiff.css (estilos CSS)
 * resources/views/vendor/textdiff/components/diff.blade.php (vistas)
+
+```html
+Hola mundo<ins>!</ins><br>
+Esta es una prueba <del></del><ins>editada</ins><br>
+Otra línea <ins>nueva</ins>

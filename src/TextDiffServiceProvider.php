@@ -17,8 +17,24 @@ class TextDiffServiceProvider extends ServiceProvider
             __DIR__.'/config/textdiff.php', 'textdiff'
         );
 
-        $this->app->singleton('textdiff', function () {
-            return new TextDiff(config('textdiff'));
+        $this->app->singleton('textdiff', function ($app) {
+            $textdiff = new TextDiff();
+
+            $config = $app['config']->get('textdiff');
+
+            if ($config) {
+                if (!empty($config['renderer_name'])) {
+                    $textdiff->setRendererName($config['renderer_name']);
+                }
+                if (!empty($config['differ_options'])) {
+                    $textdiff->setDifferOptions($config['differ_options']);
+                }
+                if (!empty($config['renderer_options'])) {
+                    $textdiff->setRendererOptions($config['renderer_options']);
+                }
+            }
+
+            return $textdiff;
         });
     }
 

@@ -3,43 +3,101 @@
 namespace Juanrube\TextDiff;
 
 use Jfcherng\Diff\DiffHelper;
+use Jfcherng\Diff\Contract\Renderer\RendererConstant;
 
 class TextDiff
 {
-    /**
-     * @var array
-     */
-    private $config;
+    protected array $differOptions;
+    protected array $rendererOptions;
+    protected string $rendererName;
 
-    /**
-     * @param array $config
-     */
-    public function __construct(array $config = [])
+    public function __construct()
     {
-        $this->config = $config;
+        $this->rendererName = 'SideBySide';
+
+        $this->differOptions = [
+            'context' => 3,
+            'ignoreCase' => false,
+            'ignoreLineEnding' => false,
+            'ignoreWhitespace' => false,
+            'lengthLimit' => 2000,
+            'fullContextIfIdentical' => false,
+        ];
+
+        $this->rendererOptions = [
+            'detailLevel' => 'line',
+            'language' => 'eng',
+            'lineNumbers' => true,
+            'separateBlock' => true,
+            'showHeader' => true,
+            'spacesToNbsp' => false,
+            'tabSize' => 4,
+            'mergeThreshold' => 0.8,
+            'cliColorization' => RendererConstant::CLI_COLOR_AUTO,
+            'outputTagAsString' => false,
+            'jsonEncodeFlags' => \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE,
+            'wordGlues' => [' ', '-'],
+            'resultForIdenticals' => null,
+            'wrapperClasses' => ['diff-wrapper'],
+        ];
     }
 
     /**
-     * Generate a diff between two texts.
+     * Set the options for the differ (differences).
      *
-     * @param string $oldText
-     * @param string $newText
-     * @param string $renderer
-     * @param array $options
-     * @return string
+     * @param array $options The options to set.
+     * 
+     * @return self
      */
-    public function generateDiff(string $oldText, string $newText, string $renderer = 'Inline', array $options = []): string
+    public function setDifferOptions(array $options): self
     {
-        $defaultOptions = [
-            'detailLevel' => $this->config['detail_level'] ?? 'word',
-            'insertMarkers' => $this->config['insert_markers'] ?? ['<ins>', '</ins>'],
-            'deleteMarkers' => $this->config['delete_markers'] ?? ['<del>', '</del>'],
-        ];
+        $this->differOptions = array_merge($this->differOptions, $options);
+        return $this;
+    }
 
-        $options = array_merge($defaultOptions, $options);
-        $renderer = $renderer ?? $this->config['renderer'] ?? 'Inline';
+    /**
+     * Set the options for the renderer (rendering).
+     *
+     * @param array $options The options to set.
+     * 
+     * @return self
+     */
+    public function setRendererOptions(array $options): self
+    {
+        $this->rendererOptions = array_merge($this->rendererOptions, $options);
+        return $this;
+    }
 
-        return DiffHelper::calculate($oldText, $newText, $renderer, $options);
+    /**
+     * Set the name of the renderer to use.
+     *
+     * @param string $name The name of the renderer.
+     * 
+     * @return self
+     */
+    public function setRendererName(string $name): self
+    {
+        $this->rendererName = $name;
+        return $this;
+    }
+
+    /**
+     * Generate the diff between two strings.
+     *
+     * @param string $old The original text.
+     * @param string $new The modified text.
+     * 
+     * @return string The generated diff.
+     */
+    public function generateDiff(string $old, string $new): string
+    {
+        return DiffHelper::calculate(
+            $old,
+            $new,
+            $this->rendererName,
+            $this->differOptions,
+            $this->rendererOptions,
+        );
     }
 
     /**
