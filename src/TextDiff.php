@@ -3,7 +3,7 @@
 namespace Juanrube\TextDiff;
 
 use Jfcherng\Diff\DiffHelper;
-use Jfcherng\Diff\Contract\Renderer\CliColorEnum;
+use Jfcherng\Diff\Renderer\RendererConstant;
 
 class TextDiff
 {
@@ -51,8 +51,8 @@ class TextDiff
             'spacesToNbsp' => false,
             'tabSize' => 4,
             'mergeThreshold' => 0.8,
-            'cliColorization' => CliColorEnum::Auto,
             'outputTagAsString' => false,
+            'cliColorization' => RendererConstant::CLI_COLOR_AUTO,
             'jsonEncodeFlags' => \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE,
             'wordGlues' => [' ', '-'],
             'resultForIdenticals' => null,
