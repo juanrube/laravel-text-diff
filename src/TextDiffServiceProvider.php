@@ -47,12 +47,16 @@ class TextDiffServiceProvider extends ServiceProvider
             __DIR__ . '/resources/views/components/diff.blade.php' => resource_path('views/vendor/textdiff/components/text-diff.blade.php'),
         ], 'text-diff');
 
+        // Registrar el componente de Blade
         Blade::component('text-diff', TextDiffComponent::class);
 
         // View Composer global para $textdiff
         View::composer('*', function ($view) {
             $view->with('textdiff', TextDiff::styleTag());
         });
+
+        // Registrar la vista de componentes
+        $this->loadViewsFrom(__DIR__ . '../resources/views', 'textdiff');
 
         // Registrar la fachada
         $this->app->alias('textdiff', TextDiffFacade::class);

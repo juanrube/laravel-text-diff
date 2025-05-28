@@ -3,14 +3,32 @@
 namespace Juanrube\TextDiff;
 
 use Jfcherng\Diff\DiffHelper;
-use Jfcherng\Diff\Contract\Renderer\RendererConstant;
+use Jfcherng\Diff\Contract\Renderer\CliColorEnum;
 
 class TextDiff
 {
+    /**
+     * Options for the differ and renderer.
+     *
+     * @var array
+     */
     protected array $differOptions;
+
+    /**
+     * Options for the renderer.
+     *
+     * @var array
+     */
     protected array $rendererOptions;
+
+    /**
+     * The name of the renderer.
+     *
+     * @var string
+     */
     protected string $rendererName;
 
+    
     public function __construct()
     {
         $this->rendererName = 'SideBySide';
@@ -33,7 +51,7 @@ class TextDiff
             'spacesToNbsp' => false,
             'tabSize' => 4,
             'mergeThreshold' => 0.8,
-            'cliColorization' => RendererConstant::CLI_COLOR_AUTO,
+            'cliColorization' => CliColorEnum::Auto,
             'outputTagAsString' => false,
             'jsonEncodeFlags' => \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE,
             'wordGlues' => [' ', '-'],
