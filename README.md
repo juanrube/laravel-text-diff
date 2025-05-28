@@ -11,12 +11,12 @@ Requiere PHP 8.1+ y Laravel 10+.
 Instalar con Composer:
 
 ```bash
-composer require juanrube/text-diff
+composer require juanrube/textdiff
 ```
 
 Para Laravel menor a 9 utilizar la versión especifica
 ```bash
-composer require juanrube/text-diff:"^1.0.0-laravel8"
+composer require juanrube/textdiff:"1.x-dev"
 ```
 
 Publicar los recursos (configuración, CSS, vistas):
