@@ -1,10 +1,10 @@
-# 📘 text-diff
+# 📘 Laravel Text Diff 📘
 
 Una librería Laravel para comparar textos y mostrar diferencias visuales en HTML, basada en [jfcherng/php-diff](https://github.com/jfcherng/php-diff).
 
 ---
 
-## 🚀 Instalación
+## Instalación
 
 Requiere PHP 8.1+ y Laravel 10+.
 
@@ -19,15 +19,41 @@ Publicar los recursos (configuración, CSS, vistas):
 ```bash
 php artisan vendor:publish --tag=text-diff
 ```
+Esto publica:
+
+* config/textdiff.php (archivo de configuración)
+* public/vendor/textdiff/textdiff.css (estilos CSS)
+* resources/views/vendor/textdiff/components/diff.blade.php (vistas)
 
 Configuración (opcional)
 
 ```php
 return [
-    'renderer' => 'Inline', // o 'SideBySide'
-    'detail_level' => 'word', // o 'char'
-    'insert_markers' => ['<ins>', '</ins>'],
-    'delete_markers' => ['<del>', '</del>'],
+    // renderer class name:
+    $rendererName => [
+        'Combined',
+        'Context',
+        'Inline',
+        'JsonHtml',
+        'JsonText',
+        'SideBySide',
+        'Unified',
+    ],
+
+    // the Diff class options
+    $differOptions => [
+        // show how many neighbor lines
+        // Differ::CONTEXT_ALL can be used to show the whole file
+        'context' => 3,
+        // ignore case difference
+        'ignoreCase' => false,
+        // ignore line ending difference
+        'ignoreLineEnding' => false,
+        // ignore whitespace difference
+        'ignoreWhitespace' => false,
+        //
+        //
+    ],
 ];
 ```
 
@@ -68,17 +94,7 @@ $html = TextDiff::generateDiff($oldText, $newText);
 $cssLink = TextDiff::styleTag();
 ```
 
-Publicación de recursos
-```php
-php artisan vendor:publish --tag=text-diff
-```
-
-Esto publica:
-
-* config/textdiff.php (archivo de configuración)
-* public/vendor/textdiff/textdiff.css (estilos CSS)
-* resources/views/vendor/textdiff/components/diff.blade.php (vistas)
-
+Ejemplos renderizado
 ```html
 Hola mundo<ins>!</ins><br>
 Esta es una prueba <del></del><ins>editada</ins><br>
