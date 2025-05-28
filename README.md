@@ -16,7 +16,7 @@ composer require juanrube/text-diff
 
 Para Laravel menor a 9 utilizar la versión especifica
 ```bash
-composer require juanrube/text-diff
+composer require juanrube/text-diff:"^1.0.0-laravel8"
 ```
 
 Publicar los recursos (configuración, CSS, vistas):
