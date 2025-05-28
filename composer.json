@@ -21,6 +21,9 @@
             "aliases": {
                 "TextDiff": "Juanrube\\TextDiff\\Facades\\TextDiff"
             }
+        },
+        "branch-alias": {
+            "dev-support-laravel-8-php74": "1.x-dev"
         }
     },
     "minimum-stability": "alpha",
