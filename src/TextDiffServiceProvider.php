@@ -44,7 +44,7 @@ class TextDiffServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/config/textdiff.php' => config_path('textdiff.php'),
             __DIR__ . '/resources/css/textdiff.css' => public_path('vendor/textdiff/textdiff.css'),
-            __DIR__ . '/resources/views/components/diff.blade.php' => resource_path('views/vendor/textdiff/components/text-diff.blade.php'),
+            __DIR__ . '/resources/views/components/text-diff.blade.php' => resource_path('views/vendor/textdiff/components/text-diff.blade.php'),
         ], 'text-diff');
 
         // Registrar el componente de Blade
